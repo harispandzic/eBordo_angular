@@ -1,0 +1,32 @@
+<div *ngIf="povreda != null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" style="display: block; padding-right: 17px;" aria-modal="true" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">Detalji povrede</h5>
+        <button type="button" (click)="povreda = null" class="close" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <b>Igrač: </b><span>{{povreda.igrac}}</span><br>
+            <b>Datum povrede: </b><span>{{povreda.datumPovrede}}</span><br>
+            <b>Odsustvo do: </b><span>{{povreda.odsustvoDO}}</span><br>
+            <b>Tip povrede: </b><span>{{povreda.tipPovrede}}</span><br>
+            <b>Opis: </b><span>{{povreda.kratkiOpis}}</span><br>
+          </div>
+          <div class="col">
+            <b>Mišljenje ljekara: </b><br>
+            <span>{{povreda.misljenjeLjekara}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="povreda = null" class="btn btn-danger">
+          <span style="margin-right:4px;"><i class="fa fa-times"></i></span>Zatvori
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div *ngIf="povredaPrikazVM != null">
+  <body>
+  <div class="container-xl">
+    <div class="table-responsive">
+      <div class="table-wrapper">
+        <div id="headerDiv" class="table-title">
+          <div class="row">
+            <div class="col-sm-6">
+              <h2>Upravljanje <b>povredama</b></h2>
+            </div>
+            <div class="col-sm-6">
+              <a (click)="dodaj()" href="#" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Dodaj povredu</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="table-filter">
+          <div class="row">
+            <div class="col-sm-1">
+              <a id="refreshDiv" (click)="refreshFilter()" style="background-color:#510520" href="#" class="btn btn-default"><i class="material-icons">&#xE863;</i></a>
+            </div>
+            <div class="col-sm-9" style="margin-left: 180px;">
+              <div style="margin-left: 0px;" class="filter-group">
+                <label>Ime i prezime</label>
+                <input [(ngModel)]="trazi" (input)="pretragaImePrezime()" placeholder="Search..." type="text" class="form-control">
+                <button (click)="pretragaImePrezime()" style="background-color:#510520" class="btn btn-primary"><i class="fa fa-search"></i></button>
+              </div>
+              <span class="filter-icon" style="margin-left: 15px;"><i class="fa fa-filter"></i></span>
+              <div style="margin-left: 0px;" class="filter-group">
+                <label>Pozicija</label>
+                <select class="form-control" [(ngModel)]="pozicija" (change)="pretragaPozicija($event)">
+                  <option>Filter...</option>
+                  <option *ngFor="let s of pozicije" [value]="s">{{s}}</option>
+                </select>
+              </div>
+              <span class="filter-icon"><i class="fa fa-filter"></i></span>
+            </div>
+          </div>
+        </div>
+        <table class="table table-striped table-hover table-bordered">
+          <thead>
+          <tr>
+            <th>Datum povrede</th>
+            <th>Igrač</th>
+            <th>Odsustvo</th>
+            <th>Kratki opis</th>
+            <th>Akcije</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let s of getPovrede()">
+            <th>{{s.datumPovrede}}</th>
+            <th>
+              <img class="avatar" src="{{adresaServera}}/uploads/{{s.slika}}">
+              {{s.igrac}}
+              <span *ngIf="s.pozicija == 'GOLMAN'" class="badge badge-dark">{{s.pozicija}}</span>
+              <span *ngIf="s.pozicija == 'ODBRANA'" class="badge badge-warning">{{s.pozicija}}</span>
+              <span *ngIf="s.pozicija == 'VEZNJAK'" class="badge badge-danger">{{s.pozicija}}</span>
+              <span *ngIf="s.pozicija == 'KRILO'" class="badge badge-success">{{s.pozicija}}</span>
+              <span *ngIf="s.pozicija == 'NAPADAČ'" class="badge badge-primary">{{s.pozicija}}</span>
+            </th>
+            <th>
+              {{s.odsustvo}}
+              <span *ngIf="!s.oporavljen" class="badge badge-dark">{{s.brojDana}} DANA</span>
+              <span *ngIf="s.oporavljen" class="badge badge-success">OPORAVLJEN</span>
+            </th>
+            <th>
+              {{s.kratkiOpis}}
+              <span *ngIf="s.tipPovrede == 'Teža'" class="badge badge-danger">{{s.tipPovrede}}</span>
+              <span *ngIf="s.tipPovrede == 'Lakša'" class="badge badge-warning">{{s.tipPovrede}}</span>
+            <th id="ikonice">
+              <a href="#" (click)="detalji(s)" class="view" title="View" data-toggle="tooltip"><i class="material-icons" style="font-size: 24px;color:#03A9F4;">&#xE417;</i></a>
+              <a href="#" (click)="uredi(s.povredaId)" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons" style="font-size: 24px;color:#FFC107;">&#xE254;</i></a>
+              <a href="#" (click)="obrisi(s)" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons" style="font-size: 24px;color:#E34724;">&#xE872;</i></a>
+            </th>
+          </tr>
+          </tbody>
+        </table>
+        <ngb-pagination [collectionSize]="povredaPrikazVM.total" [pageSize]="pageSize" [(page)]="currentPage" [maxSize]="20" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageNumberChanged($event)">
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+  </body>
+</div>
+
+
+
+<app-detalji-povreda [povreda]="povredaDetalji"></app-detalji-povreda>
+<app-uredi-povreda [povredaUrediDodaj]="povredaUredi"></app-uredi-povreda>
+<app-dodaj-povreda [povredaDodaj] = "povredaDodaj"></app-dodaj-povreda>

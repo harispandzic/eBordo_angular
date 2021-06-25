@@ -1,0 +1,84 @@
+<div *ngIf="povredaUrediDodaj != null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" style="display: block; padding-right: 17px;" aria-modal="true" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">Uredi podatke o povredi</h5>
+        <button type="button" (click)="povredaUrediDodaj = null" class="close" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <label>Opis:</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="height:38px;">
+                <span class="input-group-text"><i class="fa fa-question" aria-hidden="true"></i></span>
+              </div>
+              <input [(ngModel)]="povredaUrediDodaj.kratkiOpis" class="form-control">
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input [(ngModel)]="povredaUrediDodaj.povredaID" hidden>
+            <label>Igrač:</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-user"></i></span>
+              </div>
+              <input [(ngModel)]="povredaUrediDodaj.odabraniIgrac" class="form-control" disabled>
+            </div>
+
+            <label>Datum povrede:</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+              </div>
+              <input [(ngModel)]="povredaUrediDodaj.datumPovrede" class="form-control" type="datetime-local">
+            </div>
+
+          </div>
+          <div class="col">
+            <label>Tip povrede:</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-exclamation-triangle"></i></span>
+              </div>
+              <input [(ngModel)]="povredaUrediDodaj.tipPovrede" class="form-control" disabled>
+            </div>
+
+            <label>Odsustvo:</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+              </div>
+              <input [(ngModel)]="povredaUrediDodaj.odsustvo" class="form-control" type="datetime-local">
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Mišljenje ljekara:</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-sticky-note" aria-hidden="true"></i></span>
+              </div>
+              <textarea placeholder="Mišljenje ljekara..." [(ngModel)]="povredaUrediDodaj.misljenjeLjekara" class="form-control" id="exampleFormControlTextarea4" rows="4"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="povredaUrediDodaj = null" class="btn btn-danger">
+          <span style="margin-right:4px;"><i class="fa fa-times"></i></span>Odustani
+        </button>
+        <button type="button" (click)="Spasi()" class="btn btn-warning">
+          <span style="margin-right:4px;"><i class="fa fa-check"></i></span>Spasi izmjene
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
